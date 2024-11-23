@@ -20,11 +20,7 @@ const ContactForm = ({ onSubmit, defaultValues = {} }) => {
     watch,
   } = useForm({
     resolver: yupResolver(validationSchema),
-    defaultValues: {
-      ...defaultValues,
-      contactCategory: defaultValues.contactCategory || 'personal',
-      companyRole: defaultValues.companyRole || '',
-    },
+    defaultValues,
   });
 
   const {
@@ -36,7 +32,7 @@ const ContactForm = ({ onSubmit, defaultValues = {} }) => {
     name: 'projects',
   });
 
-  const category = watch('contactCategory', 'personal');
+  const category = watch('contactCategory');
 
   const projectNames = watch('projects', []).map((project) => project.name);
 
@@ -113,7 +109,7 @@ const ContactForm = ({ onSubmit, defaultValues = {} }) => {
       />
 
       <RadioGroup
-        label="Contact Category"
+        label="Contact Category*"
         options={[
           { value: 'personal', label: 'Personal' },
           { value: 'business', label: 'Business' },
@@ -122,6 +118,7 @@ const ContactForm = ({ onSubmit, defaultValues = {} }) => {
         value={category}
         onChange={handleCategoryChange}
         style={{ gridArea: 'type' }}
+        error={errors.contactCategory}
       />
 
       {category === 'business' && (
@@ -135,11 +132,12 @@ const ContactForm = ({ onSubmit, defaultValues = {} }) => {
             label="Company Role"
             style={{ gridArea: 'companyRole' }}
             options={[
+              { value: 'Other', label: 'Other' },
               { value: 'Manager', label: 'Manager' },
               { value: 'Employee', label: 'Employee' },
               { value: 'Consultant', label: 'Consultant' },
-              { value: 'Other', label: 'Other' },
             ]}
+            error={errors.companyRole}
             {...register('companyRole')}
           />
         </>

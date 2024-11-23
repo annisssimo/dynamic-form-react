@@ -1,9 +1,19 @@
 import styles from './RadioGroup.module.css';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
-const RadioGroup = ({ label, options, value, onChange, name, style }) => {
+const RadioGroup = ({
+  label,
+  options,
+  value,
+  onChange,
+  name,
+  style,
+  error,
+}) => {
   return (
     <div className={styles.contactCategory} style={style}>
       <label>{label}</label>
+      {error && <ErrorMessage error={error} />}
       <div className={styles.radioBtns}>
         {options.map((option) => (
           <div key={option.value}>

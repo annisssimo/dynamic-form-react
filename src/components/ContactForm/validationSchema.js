@@ -15,6 +15,7 @@ export const validationSchema = yup.object().shape({
     .string()
     .required('Phone is required')
     .matches(VALIDATE_PATTERNS.PHONE_NUMBER, "Phone number isn't valid"),
+  contactCategory: yup.string().required('Contact category is required'),
   projects: yup.array().of(
     yup.object().shape({
       name: yup.string().required('Project Name is required'),
