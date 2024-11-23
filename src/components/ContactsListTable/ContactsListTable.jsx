@@ -3,8 +3,9 @@ import { MdDelete } from 'react-icons/md';
 
 import styles from './ContactsListTable.module.css';
 import { deleteContact } from '../../api/api';
+import { editContact } from '../../api/api';
 
-const ContactsListTable = ({ data, onDelete }) => {
+const ContactsListTable = ({ data, onDelete, onEdit }) => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this contact?')) {
       try {
@@ -13,6 +14,15 @@ const ContactsListTable = ({ data, onDelete }) => {
       } catch (error) {
         alert(error.message);
       }
+    }
+  };
+
+  const handleEdit = async (id) => {
+    try {
+      await editContact(id);
+      onEdit(id);
+    } catch (error) {
+      alert(error.message);
     }
   };
 
@@ -63,7 +73,10 @@ const ContactsListTable = ({ data, onDelete }) => {
                 })}
               </td>
               <td>
-                <button className={`${styles.editBtn} ${styles.actionBtn}`}>
+                <button
+                  className={`${styles.editBtn} ${styles.actionBtn}`}
+                  onClick={() => handleEdit(contact.id)}
+                >
                   <MdEdit />
                 </button>
               </td>

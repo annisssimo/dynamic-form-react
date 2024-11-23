@@ -24,6 +24,10 @@ const ListPage = () => {
     );
   };
 
+  const handleEditContact = (id) => {
+    navigate(`/edit/${id}`);
+  };
+
   const handleCreateClick = () => {
     navigate('/create');
   };
@@ -32,7 +36,11 @@ const ListPage = () => {
     <div className={styles.container}>
       <h1>Contact List</h1>
 
-      <ContactsListTable data={contactsList} onDelete={handleDeleteContact} />
+      <ContactsListTable
+        data={contactsList}
+        onDelete={handleDeleteContact}
+        onEdit={handleEditContact}
+      />
 
       <button className={styles.createButton} onClick={handleCreateClick}>
         Create New Contact

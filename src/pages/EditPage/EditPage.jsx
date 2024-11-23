@@ -1,16 +1,19 @@
-import axios from 'axios';
 import ContactForm from '../../components/ContactForm/ContactForm';
+import { editContact } from '../../api/api';
+import { useLoaderData } from 'react-router';
 
 const EditPage = () => {
-  const onSubmit = async (data) => {
-    console.log(data);
-    try {
-      await axios.post('http://localhost:3441/api/contacts', data);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-  return <ContactForm onSubmit={onSubmit} />;
+  const { contact } = useLoaderData();
+
+  return (
+    <>
+      <h1>Edit Contact</h1>
+      <ContactForm
+        onSubmit={(id, data) => editContact(id, data)}
+        defaultValues={contact}
+      />
+    </>
+  );
 };
 
 export default EditPage;

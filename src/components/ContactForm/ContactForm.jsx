@@ -51,7 +51,9 @@ const ContactForm = ({ onSubmit, defaultValues = {} }) => {
   };
 
   const handleFormSubmit = (data) => {
-    onSubmit(data);
+    const { id, ...updateData } = data;
+    console.log(updateData);
+    onSubmit(id, updateData);
     navigate('/');
   };
 

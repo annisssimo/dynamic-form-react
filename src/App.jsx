@@ -5,6 +5,7 @@ import ListPage from './pages/ListPage/ListPage';
 import EditPage from './pages/EditPage/EditPage';
 import CreatePage from './pages/CreatePage/CreatePage';
 import { getAllContacts } from './api/api';
+import { getContactById } from './api/api';
 
 const router = createBrowserRouter(
   [
@@ -22,7 +23,11 @@ const router = createBrowserRouter(
     },
     {
       element: <EditPage />,
-      path: '/edit',
+      path: '/edit/:id',
+      loader: async ({ params }) => {
+        const contact = await getContactById(params.id);
+        return { contact };
+      },
     },
   ],
   {
