@@ -34,7 +34,7 @@ const ProjectList = ({
       ))}
       <button
         type="button"
-        onClick={() => addProject({ name: '', tasks: [] })}
+        onClick={() => addProject({ name: '' })}
         className={styles.addProjectButton}
         disabled={!canAddProject}
       >

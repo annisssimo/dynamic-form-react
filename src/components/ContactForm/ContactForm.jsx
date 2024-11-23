@@ -1,5 +1,6 @@
 import { useForm, useFieldArray } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router';
 
 import { validationSchema } from './validationSchema';
 import FormWrapper from '../FormWrapper/FormWrapper';
@@ -32,6 +33,8 @@ const ContactForm = ({ onSubmit, defaultValues = {} }) => {
     name: 'projects',
   });
 
+  const navigate = useNavigate();
+
   const category = watch('contactCategory');
 
   const projectNames = watch('projects', []).map((project) => project.name);
@@ -47,8 +50,13 @@ const ContactForm = ({ onSubmit, defaultValues = {} }) => {
     };
   };
 
+  const handleFormSubmit = (data) => {
+    onSubmit(data);
+    navigate('/');
+  };
+
   return (
-    <FormWrapper onSubmit={handleSubmit(onSubmit)}>
+    <FormWrapper onSubmit={handleSubmit(handleFormSubmit)}>
       <InputField
         label="First Name*"
         error={errors.firstName}

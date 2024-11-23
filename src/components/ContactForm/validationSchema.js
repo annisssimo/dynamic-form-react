@@ -19,12 +19,6 @@ export const validationSchema = yup.object().shape({
   projects: yup.array().of(
     yup.object().shape({
       name: yup.string().required('Project Name is required'),
-      tasks: yup.array().of(
-        yup.object().shape({
-          name: yup.string().required('Task Name is required'),
-          status: yup.string().required('Task Status is required'),
-        })
-      ),
     })
   ),
 });
