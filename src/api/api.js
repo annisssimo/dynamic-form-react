@@ -1,19 +1,32 @@
 import axios from 'axios';
 
-export const createContact = async (data) => {
-  console.log(data);
+const API_BASE_URL = 'http://localhost:3441/api';
+
+export const getAllContacts = async () => {
   try {
-    await axios.post('http://localhost:3441/api/contacts', data);
+    const contactsList = await axios.get(`${API_BASE_URL}/contacts`);
+    return contactsList.data;
   } catch (err) {
     console.error(err);
   }
 };
 
-export const getAllContacts = async () => {
+export const createContact = async (data) => {
+  console.log(data);
   try {
-    const contactsList = await axios.get('http://localhost:3441/api/contacts');
-    return contactsList.data;
+    await axios.post(`${API_BASE_URL}/contacts`, data);
   } catch (err) {
     console.error(err);
+  }
+};
+
+export const deleteContact = async (id) => {
+  try {
+    const response = await axios.delete(`${API_BASE_URL}/contacts/${id}`);
+    console.log(id);
+    return response.data;
+  } catch (error) {
+    console.error('Failed to delete contact:', error);
+    throw error;
   }
 };

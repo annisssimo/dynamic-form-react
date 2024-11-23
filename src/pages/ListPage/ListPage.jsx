@@ -18,6 +18,12 @@ const ListPage = () => {
     fetchContacts();
   }, []);
 
+  const handleDeleteContact = (id) => {
+    setContactsList((prevContacts) =>
+      prevContacts.filter((contact) => contact.id !== id)
+    );
+  };
+
   const handleCreateClick = () => {
     navigate('/create');
   };
@@ -26,7 +32,7 @@ const ListPage = () => {
     <div className={styles.container}>
       <h1>Contact List</h1>
 
-      <ContactsListTable data={contactsList} />
+      <ContactsListTable data={contactsList} onDelete={handleDeleteContact} />
 
       <button className={styles.createButton} onClick={handleCreateClick}>
         Create New Contact

@@ -2,8 +2,20 @@ import { MdEdit } from 'react-icons/md';
 import { MdDelete } from 'react-icons/md';
 
 import styles from './ContactsListTable.module.css';
+import { deleteContact } from '../../api/api';
 
-const ContactsListTable = ({ data }) => {
+const ContactsListTable = ({ data, onDelete }) => {
+  const handleDelete = async (id) => {
+    if (window.confirm('Are you sure you want to delete this contact?')) {
+      try {
+        await deleteContact(id);
+        onDelete(id);
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+  };
+
   return (
     <table className={styles.table}>
       <thead>
@@ -56,7 +68,10 @@ const ContactsListTable = ({ data }) => {
                 </button>
               </td>
               <td>
-                <button className={`${styles.deleteBtn} ${styles.actionBtn}`}>
+                <button
+                  className={`${styles.deleteBtn} ${styles.actionBtn}`}
+                  onClick={() => handleDelete(contact.id)}
+                >
                   <MdDelete />
                 </button>
               </td>
