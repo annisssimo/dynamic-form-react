@@ -47,11 +47,6 @@ const ContactForm = ({ onSubmit, defaultValues = {} }) => {
     };
   };
 
-  const handleCategoryChange = (value) => {
-    setValue('contactCategory', value);
-    clearErrors('contactCategory');
-  };
-
   return (
     <FormWrapper onSubmit={handleSubmit(onSubmit)}>
       <InputField
@@ -115,8 +110,7 @@ const ContactForm = ({ onSubmit, defaultValues = {} }) => {
           { value: 'business', label: 'Business' },
         ]}
         name="contactCategory"
-        value={category}
-        onChange={handleCategoryChange}
+        register={register}
         style={{ gridArea: 'type' }}
         error={errors.contactCategory}
       />
