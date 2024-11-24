@@ -1,22 +1,13 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useState } from 'react';
+import { useNavigate, useLoaderData } from 'react-router';
 
 import styles from './ListPage.module.css';
 import ContactsListTable from '../../components/ContactsListTable/ContactsListTable';
-import { getAllContacts } from '../../api/api';
 
 const ListPage = () => {
-  const [contactsList, setContactsList] = useState([]);
+  const { contacts } = useLoaderData() || {};
+  const [contactsList, setContactsList] = useState(contacts || []);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchContacts = async () => {
-      const contacts = await getAllContacts();
-      setContactsList(contacts);
-    };
-
-    fetchContacts();
-  }, []);
 
   const handleDeleteContact = (id) => {
     setContactsList((prevContacts) =>

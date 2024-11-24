@@ -9,6 +9,7 @@ import InputField from '../InputField/InputField';
 import SelectField from '../SelectField/SelectField';
 import RadioGroup from '../RadioGroup/RadioGroup';
 import ProjectList from '../ProjectList/ProjectList';
+import useSaveButtonText from '../../hooks/useSaveButtonText';
 
 const ContactForm = ({ onSubmit, defaultValues = {} }) => {
   const {
@@ -38,6 +39,8 @@ const ContactForm = ({ onSubmit, defaultValues = {} }) => {
   const projectNames = watch('projects', []).map((project) => project.name);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const buttonText = useSaveButtonText(isSubmitting);
 
   const canAddProject = projectNames.every(
     (name) => name && name.trim() !== ''
@@ -165,7 +168,7 @@ const ContactForm = ({ onSubmit, defaultValues = {} }) => {
         className={styles.saveButton}
         disabled={isSubmitting}
       >
-        {isSubmitting ? 'Saving...' : 'SAVE'}
+        {buttonText}
       </button>
     </FormWrapper>
   );
