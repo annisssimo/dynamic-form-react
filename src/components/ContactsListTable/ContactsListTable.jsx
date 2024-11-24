@@ -55,9 +55,16 @@ const ContactsListTable = ({ data, onDelete, onEdit }) => {
               <td>{contact.method}</td>
               <td>
                 {contact.contactCategory === 'business'
-                  ? `${contact.contactCategory} (${contact.companyRole} at ${contact.companyName})`
+                  ? contact.companyRole && contact.companyName
+                    ? `${contact.contactCategory} (${contact.companyRole} at ${contact.companyName})`
+                    : contact.companyRole
+                    ? `${contact.contactCategory} (${contact.companyRole})`
+                    : contact.companyName
+                    ? `${contact.contactCategory} (${contact.companyName})`
+                    : `${contact.contactCategory}`
                   : `${contact.contactCategory}`}
               </td>
+
               <td>
                 {contact.projects?.map((proj, index) => {
                   return (

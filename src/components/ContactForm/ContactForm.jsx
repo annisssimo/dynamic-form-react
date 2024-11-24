@@ -55,7 +55,7 @@ const ContactForm = ({ onSubmit, defaultValues = {} }) => {
     try {
       await onSubmit(data);
     } catch (error) {
-      alert('An error occurred while saving. Please check the data.');
+      alert(error);
     } finally {
       setIsSubmitting(false);
     }
