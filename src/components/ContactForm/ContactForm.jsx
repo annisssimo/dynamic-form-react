@@ -55,7 +55,7 @@ const ContactForm = ({ onSubmit, defaultValues = {} }) => {
     try {
       await onSubmit(data);
     } catch (error) {
-      alert(error);
+      alert(error.message);
     } finally {
       setIsSubmitting(false);
     }

@@ -2,20 +2,21 @@ import { useLoaderData, useNavigate } from 'react-router';
 
 import ContactForm from '../../components/ContactForm/ContactForm';
 import { editContact } from '../../api/api';
+import { filterData } from '../../utils/filterData';
+import { ERROR_MESSAGES } from '../../shared/constants/errorMessages';
 
 const EditPage = () => {
   const { contact } = useLoaderData();
   const navigate = useNavigate();
 
   const handleEdit = async (data) => {
-    if (Object.keys(data).length > 0) {
-      try {
-        await editContact(contact.id, data);
-        navigate('/');
-      } catch (error) {
-        alert('Failed to update contact. Please try again.');
-        console.error('Failed to update contact', error);
-      }
+    const filteredData = filterData(data, contact);
+    try {
+      await editContact(contact.id, filteredData);
+      navigate('/');
+    } catch (error) {
+      alert(ERROR_MESSAGES.UPDATE_FAILED);
+      console.error('Failed to update contact', error);
     }
   };
 

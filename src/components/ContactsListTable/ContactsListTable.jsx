@@ -3,15 +3,17 @@ import { MdDelete } from 'react-icons/md';
 
 import styles from './ContactsListTable.module.css';
 import { deleteContact } from '../../api/api';
+import { ERROR_MESSAGES } from '../../shared/constants/errorMessages';
 
 const ContactsListTable = ({ data, onDelete, onEdit }) => {
   const handleDelete = async (id) => {
-    if (window.confirm('Are you sure you want to delete this contact?')) {
+    if (window.confirm(ERROR_MESSAGES.DELETE_CONFIRMATION)) {
       try {
         await deleteContact(id);
         onDelete(id);
       } catch (error) {
-        alert(error.message);
+        alert(ERROR_MESSAGES.DELETE_FAILED);
+        console.error(error.message);
       }
     }
   };

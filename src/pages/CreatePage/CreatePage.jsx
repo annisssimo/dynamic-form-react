@@ -2,13 +2,15 @@ import { useNavigate } from 'react-router';
 
 import ContactForm from '../../components/ContactForm/ContactForm';
 import { createContact } from '../../api/api';
+import { filterData } from '../../utils/filterData';
 
 const CreatePage = () => {
   const navigate = useNavigate();
 
   const handleCreate = async (data) => {
-    if (Object.keys(data).length > 0) {
-      await createContact(data);
+    const filteredData = filterData(data);
+    if (Object.keys(filteredData).length > 0) {
+      await createContact(filteredData);
       navigate('/');
     }
   };
