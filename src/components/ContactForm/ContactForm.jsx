@@ -1,6 +1,6 @@
+import { useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate } from 'react-router';
 
 import { validationSchema } from './validationSchema';
 import FormWrapper from '../FormWrapper/FormWrapper';
@@ -33,11 +33,11 @@ const ContactForm = ({ onSubmit, defaultValues = {} }) => {
     name: 'projects',
   });
 
-  const navigate = useNavigate();
-
   const category = watch('contactCategory');
 
   const projectNames = watch('projects', []).map((project) => project.name);
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const canAddProject = projectNames.every(
     (name) => name && name.trim() !== ''
@@ -50,11 +50,15 @@ const ContactForm = ({ onSubmit, defaultValues = {} }) => {
     };
   };
 
-  const handleFormSubmit = (data) => {
-    const { id, ...updateData } = data;
-    console.log(updateData);
-    onSubmit(id, updateData);
-    navigate('/');
+  const handleFormSubmit = async (data) => {
+    setIsSubmitting(true);
+    try {
+      await onSubmit(data);
+    } catch (error) {
+      alert('An error occurred while saving. Please check the data.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -156,8 +160,12 @@ const ContactForm = ({ onSubmit, defaultValues = {} }) => {
         canAddProject={canAddProject}
       />
 
-      <button type="submit" className={styles.saveButton}>
-        SAVE
+      <button
+        type="submit"
+        className={styles.saveButton}
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? 'Saving...' : 'SAVE'}
       </button>
     </FormWrapper>
   );

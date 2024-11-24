@@ -30,6 +30,7 @@ export const deleteContact = async (id) => {
 };
 
 export const editContact = async (id, data) => {
+  console.log(data);
   try {
     const response = await axios.put(`${API_BASE_URL}/contacts/${id}`, data);
     return response.data;

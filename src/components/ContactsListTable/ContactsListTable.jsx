@@ -3,7 +3,6 @@ import { MdDelete } from 'react-icons/md';
 
 import styles from './ContactsListTable.module.css';
 import { deleteContact } from '../../api/api';
-import { editContact } from '../../api/api';
 
 const ContactsListTable = ({ data, onDelete, onEdit }) => {
   const handleDelete = async (id) => {
@@ -19,7 +18,6 @@ const ContactsListTable = ({ data, onDelete, onEdit }) => {
 
   const handleEdit = async (id) => {
     try {
-      await editContact(id);
       onEdit(id);
     } catch (error) {
       alert(error.message);
