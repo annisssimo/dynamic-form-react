@@ -1,0 +1,31 @@
+.contactCategory .radioBtns {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.radioBtns label {
+  display: inline-block;
+  margin-right: 1rem;
+  padding: 5px 10px;
+  border: 1px solid #d1d9e0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.radioBtns label:hover {
+  background-color: #f0f4f8;
+}
+
+input[type='radio'] {
+  display: none;
+}
+
+input[type='radio']:checked + label {
+  background-color: #646cff;
+  color: #fff;
+  border-color: #646cff;
+}

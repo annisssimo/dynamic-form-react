@@ -1,0 +1,14 @@
+input,
+select {
+  padding: 5px 12px;
+  border: 1px solid #d1d9e0;
+  border-radius: 6px;
+  box-shadow: inset 0px 1px 0px 0px #1f23280a;
+}
+
+.saveButton {
+  grid-area: submit;
+  justify-self: center;
+  background-color: #646cff;
+  color: #fff;
+}

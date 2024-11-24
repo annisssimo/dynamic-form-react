@@ -1,0 +1,45 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  background-color: #f6f8fa;
+}
+
+.table th,
+.table td {
+  padding: 1rem;
+  border: max(1px, 0.0625rem) solid #d1d9e0b3;
+  padding: 8px;
+}
+
+.noData {
+  text-align: center;
+  font-style: italic;
+}
+
+.actionBtn {
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.editBtn {
+  background-color: #25bce6;
+}
+
+.editBtn:hover {
+  background-color: #00c8ff;
+}
+
+.deleteBtn {
+  background-color: #ff6b6b;
+}
+
+.deleteBtn:hover {
+  background-color: #ff4c4c;
+}
